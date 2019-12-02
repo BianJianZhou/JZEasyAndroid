@@ -1,0 +1,5 @@
+整个项目使用 appJoint框架进行模块化开发
+jztools             为实用工具库
+wystudytestlib      为学习测试库
+wydemolib           为各种小例子库
+...
