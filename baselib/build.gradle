@@ -12,7 +12,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
@@ -29,10 +29,9 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    /* 公共库 */
-    implementation project(path: ':baselib')
-    implementation project(path: ':router')
+    /* 组件化开发方案 */
+    api "io.github.prototypez:app-joint-core:1.7"
 }

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'app-joint'
 
 android {
     compileSdkVersion 29
@@ -30,6 +31,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
     implementation project(path: ':wystudytestlib')
     implementation project(path: ':wydemolib')
+
+    /* 公共库 */
+    implementation project(path: ':baselib')
+    /* 模块交互库 */
+    implementation project(path: ':router')
+
 }
