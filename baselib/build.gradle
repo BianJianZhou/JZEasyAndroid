@@ -1,17 +1,20 @@
-apply plugin: 'com.android.application'
-apply plugin: 'app-joint'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
 
     defaultConfig {
-        applicationId "com.bjz.wyeasyandroid"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -19,25 +22,20 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation project(path: ':wystudytestlib')
-    implementation project(path: ':wydemolib')
-
-    /* 公共库 */
-    implementation project(path: ':baselib')
-    /* 模块交互库 */
-    implementation project(path: ':router')
-
+    /* 组件化开发方案 */
+    api "io.github.prototypez:app-joint-core:1.7"
 }
