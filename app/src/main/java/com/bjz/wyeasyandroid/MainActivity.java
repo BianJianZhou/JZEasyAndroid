@@ -10,6 +10,9 @@ public class MainActivity extends Activity {
 
     TextView textView;
 
+    TextView
+            toBitmapTestText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +25,18 @@ public class MainActivity extends Activity {
 
     }
 
-    private void bindView(){
+    private void bindView() {
         textView = findViewById(R.id.main_skip_synchronized_test_text);
+        toBitmapTestText = findViewById(R.id.main_skip_bitmap_operation_test_text);
     }
 
-    private void setOnClick(){
+    private void setOnClick() {
         textView.setOnClickListener(view -> {
             StudyTestManager.synchronizedTestClass.skipSynchronizedTestActivity(this);
+        });
+        /* 跳转bitmap测试页面 */
+        toBitmapTestText.setOnClickListener(v -> {
+            StudyTestManager.synchronizedTestClass.skipBitmapOperationActivity(this);
         });
     }
 

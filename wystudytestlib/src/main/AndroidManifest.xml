@@ -2,8 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bjz.wystudytestlib">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application>
-        <activity android:name=".thread.synchronizedTest.SynchronizedTestActivity"></activity>
+        <activity android:name=".imgOperation.ui.BitmapOperationActivity"></activity>
+        <activity android:name=".thread.synchronizedTest.SynchronizedTestActivity" />
+
+        <service android:name=".acrossProcesses.service.AcrossProcessesTestService" />
     </application>
 
 </manifest>

@@ -1,27 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".imgOperation.ui.BitmapOperationActivity">
 
     <TextView
-        android:id="@+id/main_skip_synchronized_test_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimens_10"
         android:background="@color/_f4f4f4"
         android:padding="@dimen/dimens_10"
-        android:text="跳转同步锁测试页面"
+        android:text="跳转Bitmap各种操作工具类"
         android:textColor="@color/st_cff8f0a"
-        android:textSize="@dimen/dimens_26"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="@dimen/dimens_26" />
 
     <TextView
-        android:id="@+id/main_skip_bitmap_operation_test_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimens_10"
+        android:background="@color/_f4f4f4"
+        android:padding="@dimen/dimens_10"
+        android:text="跳转Bitmap各种操作工具类"
+        android:textColor="@color/st_cff8f0a"
+        android:textSize="@dimen/dimens_26" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimens_10"
+        android:background="@color/_f4f4f4"
+        android:padding="@dimen/dimens_10"
+        android:text="跳转Bitmap各种操作工具类"
+        android:textColor="@color/st_cff8f0a"
+        android:textSize="@dimen/dimens_26" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimens_10"

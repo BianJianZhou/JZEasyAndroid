@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="app_cff8f0a">#ff8f0a</color>
-    <color name="app_cccff00">#ccff00</color>
-    <color name="app_cf4f4f4">#f4f4f4</color>
+    <color name="_ff8f0a">#ff8f0a</color>
+    <color name="_ccff00">#ccff00</color>
+    <color name="_f4f4f4">#f4f4f4</color>
 </resources>
