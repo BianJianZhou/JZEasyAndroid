@@ -1,10 +1,16 @@
 package com.bjz.wystudytestlib.imgOperation.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class BitmapUtil {
 
@@ -22,13 +28,44 @@ public class BitmapUtil {
     }
 
     /* 资源文件转bitmap */
-    public static Bitmap resToBitmap() {
-        return null;
+    public static Bitmap resToBitmap(Context context, int resId) {
+        Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), resId);
+        return bmp;
     }
 
     /* bitmap存本地 */
-    public static void bitSaveNative(String bmp, String savePath, String imgName) {
-
+    public static void bitSaveNative(Bitmap bmp, String savePathTemp, String imgName) {
+        String savePath = "/sdcard/namecard";
+        /* 需要进行判断是否有读写存储卡权限 */
+        /* 还没有实现 */
+        /* 这里是干啥的不懂 */
+        File pathFile = new File(savePath);
+        if (!pathFile.exists()) {
+            pathFile.mkdirs();
+        }
+        Bitmap.CompressFormat bmpFormat = Bitmap.CompressFormat.JPEG;
+        String imgNameTemp = imgName;
+        String suffix = ".jpg";
+        if (imgNameTemp.contains(".png")) {
+            bmpFormat = Bitmap.CompressFormat.PNG;
+            suffix = ".png";
+        }
+        if (imgNameTemp.contains(".")) {
+            imgNameTemp = imgNameTemp.substring(0, imgNameTemp.indexOf("."));
+        }
+        imgNameTemp = imgNameTemp + "_" + System.currentTimeMillis() + suffix;
+        String imgAbsPath = savePath + "/" + imgNameTemp;
+        try {
+            FileOutputStream outputStream = new FileOutputStream(new File(imgAbsPath));
+            bmp.compress(bmpFormat, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+            /* 输出保存文件的路径 */
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /* 资源文件转drawable */
