@@ -1,4 +1,4 @@
-package com.bjz.wyeasyandroid;
+package com.bjz.jzeasyandroid;
 
 import org.junit.Test;
 

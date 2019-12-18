@@ -1,49 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".imgOperation.ui.BitmapOperationActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimens_10"
-        android:background="@color/_f4f4f4"
-        android:padding="@dimen/dimens_10"
-        android:text="跳转Bitmap各种操作工具类"
-        android:textColor="@color/st_cff8f0a"
-        android:textSize="@dimen/dimens_26" />
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimens_10"
-        android:background="@color/_f4f4f4"
-        android:padding="@dimen/dimens_10"
-        android:text="跳转Bitmap各种操作工具类"
-        android:textColor="@color/st_cff8f0a"
-        android:textSize="@dimen/dimens_26" />
+        <TextView
+            android:id="@+id/bitmap_test_native_pic_to_bitmap_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimens_10"
+            android:background="@color/_f4f4f4"
+            android:padding="@dimen/dimens_10"
+            android:text="本地图片转bitmap"
+            android:textColor="@color/st_cff8f0a"
+            android:textSize="@dimen/dimens_26" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimens_10"
-        android:background="@color/_f4f4f4"
-        android:padding="@dimen/dimens_10"
-        android:text="跳转Bitmap各种操作工具类"
-        android:textColor="@color/st_cff8f0a"
-        android:textSize="@dimen/dimens_26" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimens_10"
+            android:background="@color/_f4f4f4"
+            android:padding="@dimen/dimens_10"
+            android:text="跳转Bitmap各种操作工具类"
+            android:textColor="@color/st_cff8f0a"
+            android:textSize="@dimen/dimens_26" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimens_10"
-        android:background="@color/_f4f4f4"
-        android:padding="@dimen/dimens_10"
-        android:text="跳转Bitmap各种操作工具类"
-        android:textColor="@color/st_cff8f0a"
-        android:textSize="@dimen/dimens_26" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimens_10"
+            android:background="@color/_f4f4f4"
+            android:padding="@dimen/dimens_10"
+            android:text="跳转Bitmap各种操作工具类"
+            android:textColor="@color/st_cff8f0a"
+            android:textSize="@dimen/dimens_26" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimens_10"
+            android:background="@color/_f4f4f4"
+            android:padding="@dimen/dimens_10"
+            android:text="跳转Bitmap各种操作工具类"
+            android:textColor="@color/st_cff8f0a"
+            android:textSize="@dimen/dimens_26" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bitmap_test_img"
+        android:layout_width="@dimen/dimens_600"
+        android:layout_height="@dimen/dimens_600"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dimens_160"
+        android:src="@mipmap/bitmap_control_test_img1" />
+
+</RelativeLayout>

@@ -4,10 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
 import android.util.Log;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,13 +19,40 @@ public class BitmapUtil {
     public static Bitmap fileToBitmap(String fileAbsPath) {
         if (!new File(fileAbsPath).exists()) {
             /* 图片不存在 */
+            Log.i("BitmapUtil", "file not find");
             return null;
         }
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 2;
+        options.inSampleSize = 1;
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         Bitmap bmp = BitmapFactory.decodeFile(fileAbsPath, options);
+        if (bmp != null) {
+            Log.i("BitmapUtil", "fileToBitmap bmp size：" + bmp.getByteCount());
+        }
         return bmp;
+    }
+
+
+    /**
+     * 将本地图片转成Bitmap
+     * @param path 已有图片的路径
+     * @return
+     */
+    public static Bitmap openImage(String path){
+        Bitmap bitmap = null;
+        try {
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(path));
+            bitmap = BitmapFactory.decodeStream(bis);
+            bis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (bitmap != null){
+            Log.i("BitmapUtil", "openImage bmp size：" + bitmap.getByteCount());
+        }
+        return bitmap;
     }
 
     /* 资源文件转bitmap */
@@ -34,8 +62,8 @@ public class BitmapUtil {
     }
 
     /* bitmap存本地 */
-    public static void bitSaveNative(Bitmap bmp, String savePathTemp, String imgName) {
-        String savePath = "/sdcard/namecard";
+    /* String savePath = "/sdcard"; */
+    public static void bitSaveNative(Bitmap bmp, String savePath, String imgName) {
         /* 需要进行判断是否有读写存储卡权限 */
         /* 还没有实现 */
         /* 这里是干啥的不懂 */

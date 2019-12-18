@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 自定义的Toast动画 -->
+    <style name="Common.Animation.Toast" parent="@android:style/Animation.Toast">
+        <item name="android:windowEnterAnimation">@anim/common_toast_enter</item>
+        <item name="android:windowExitAnimation">@anim/common_toast_exit</item>
+    </style>
+</resources>

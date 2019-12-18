@@ -1,4 +1,4 @@
-package com.bjz.wyeasyandroid;
+package com.bjz.jzeasyandroid;
 
 import android.app.Activity;
 import android.os.Bundle;
