@@ -8,6 +8,17 @@ import java.util.Map;
 import java.util.Set;
 
 public class JZPageData {
+
+    private int intentFlag;
+
+    public int getIntentFlag() {
+        return intentFlag;
+    }
+
+    public void setIntentFlag(int intentFlag) {
+        this.intentFlag = intentFlag;
+    }
+
     Map<String, Object> map = new HashMap<>();
 
     public Set<String> getKeys() {
@@ -30,5 +41,6 @@ public class JZPageData {
         }
         return null;
     }
+
 
 }

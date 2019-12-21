@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.annotation.LayoutRes;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
-import com.wy.viewFrame.R;
-import com.wy.viewFrame.util.WYToast;
+import com.bjz.baselib.R;
+import com.bjz.baselib.utils.JZToast;
 
 /**
  * Created by 边江洲 on 2017/10/10.
@@ -55,7 +54,7 @@ public abstract class WYBasePopWindow extends PopupWindow {
         setTouchable(true);
         setOutsideTouchable(true);
         setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-        setAnimationStyle(R.style.pop_from_bottom_anim_style);
+        setAnimationStyle(R.style.Base_PopAnim_FromBottom);
         setContentView(view);
         initView();
         setClickListener();
@@ -77,7 +76,6 @@ public abstract class WYBasePopWindow extends PopupWindow {
 
     protected abstract int getPopHeight();
 
-    @LayoutRes
     protected abstract int getLayoutResId();
 
     protected abstract void initView();
@@ -130,7 +128,7 @@ public abstract class WYBasePopWindow extends PopupWindow {
      * 显示toast
      */
     public void showToast(String str) {
-        WYToast.showShortToast(context, str);
+        JZToast.showShortToast(context, str);
     }
 
     public void hidePop() {

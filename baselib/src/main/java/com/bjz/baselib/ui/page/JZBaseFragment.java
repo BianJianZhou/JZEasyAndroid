@@ -14,6 +14,7 @@ import com.bjz.baselib.JZBasePresenter;
 import com.bjz.baselib.bean.JZLoadingBean;
 import com.bjz.baselib.bean.JZPageData;
 import com.bjz.baselib.JZPageLeftCycle;
+import com.bjz.baselib.event.JZOneStatusCallBack;
 import com.bjz.baselib.utils.JZToast;
 
 import java.io.Serializable;
@@ -22,9 +23,9 @@ import java.io.Serializable;
  * Created by 边江洲 on 2017/11/1.
  */
 
-public abstract class JZBasicFragment<T extends JZBasePresenter> extends Fragment implements IJZBaseView {
+public abstract class JZBaseFragment<T extends JZBasePresenter> extends Fragment implements IJZBaseView {
 
-    public static <F extends JZBasicFragment> F getInstance(JZPageData data) {
+    public static <F extends JZBaseFragment> F getInstance(JZPageData data) {
         F fragment = (F) new Fragment();
         Bundle bundle = new Bundle();
         if (data != null && data.getKeys() != null) {
@@ -56,10 +57,11 @@ public abstract class JZBasicFragment<T extends JZBasePresenter> extends Fragmen
     public Context mContext;
 
     private JZPageLeftCycle pageLeftCycle;
+    public boolean isResume = false;
     public boolean isPause = false;
     public boolean isStop = false;
     public boolean isDestory = false;
-    public boolean isFristInto = false;
+    public boolean isFirstInto = true;
 
     T presenter;
 
@@ -79,6 +81,10 @@ public abstract class JZBasicFragment<T extends JZBasePresenter> extends Fragmen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        isResume = false;
+        isPause = false;
+        isStop = false;
+        isDestory = false;
         presenter = getPresenter();
         pageLeftCycle.onStart();
 
@@ -131,18 +137,36 @@ public abstract class JZBasicFragment<T extends JZBasePresenter> extends Fragmen
     @Override
     public void onResume() {
         super.onResume();
+        isResume = true;
         isPause = false;
         isStop = false;
         isDestory = false;
         pageLeftCycle.onResume();
+        postDelayed(300, result -> {
+            if (isFirstInto) {
+                isFirstInto = false;
+            }
+        });
+    }
+
+    /* 延时方法调用 */
+    public void postDelayed(long time, JZOneStatusCallBack oneStatusCallBack) {
+        view.postDelayed(() -> {
+            if (oneStatusCallBack != null) {
+                oneStatusCallBack.result("");
+            }
+        }, time);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        isResume = false;
         isPause = true;
-        if (isFristInto) {
-            isFristInto = false;
+        isStop = false;
+        isDestory = false;
+        if (isFirstInto) {
+            isFirstInto = false;
         }
         pageLeftCycle.onPause();
     }
@@ -150,7 +174,10 @@ public abstract class JZBasicFragment<T extends JZBasePresenter> extends Fragmen
     @Override
     public void onStop() {
         super.onStop();
+        isResume = false;
+        isPause = false;
         isStop = true;
+        isDestory = false;
         pageLeftCycle.onStop();
     }
 
@@ -159,6 +186,9 @@ public abstract class JZBasicFragment<T extends JZBasePresenter> extends Fragmen
     @Override
     public void onDestroy() {
         super.onDestroy();
+        isResume = false;
+        isPause = false;
+        isStop = false;
         isDestory = true;
         pageLeftCycle.onDestory(presenter, mContext);
     }

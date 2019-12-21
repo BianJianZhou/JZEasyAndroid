@@ -7,6 +7,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bjz.baselib.R;
+
 import java.lang.reflect.Field;
 
 /**
@@ -49,7 +51,7 @@ public class JZToast {
                 textview_id = context.getResources().getSystem().getIdentifier("message", "id", "android");
             ((TextView) mToast.getView().findViewById(textview_id)).setGravity(Gravity.CENTER);
 
-            mToast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, (int) context.getResources().getDimension(com.example.jzcommon.R.dimen.dimens_320));
+            mToast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, (int) context.getResources().getDimension(R.dimen.dimens_320));
             Object mTN;
             mTN = getField(mToast, "mTN");
             if (mTN != null) {
@@ -60,7 +62,7 @@ public class JZToast {
                     params.height = WindowManager.LayoutParams.WRAP_CONTENT;
                     params.width = WindowManager.LayoutParams.WRAP_CONTENT;
                     params.format = PixelFormat.TRANSLUCENT;
-                    params.windowAnimations = com.example.jzcommon.R.style.Common_Animation_Toast;
+                    params.windowAnimations = R.style.Base_Toast_Anim;
                     params.type = WindowManager.LayoutParams.TYPE_TOAST;
                     params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                             | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE

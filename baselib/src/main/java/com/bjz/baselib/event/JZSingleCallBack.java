@@ -1,7 +1,5 @@
 package com.bjz.baselib.event;
 
-import com.bjz.baselib.JZLog;
-
 import java.util.HashMap;
 import java.util.Map;
 
