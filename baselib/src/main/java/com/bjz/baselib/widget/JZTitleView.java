@@ -9,6 +9,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjz.baselib.R;
+import com.bjz.baselib.utils.JZLog;
+import com.bjz.baselib.utils.JZPageAnimUtils;
 
 /**
  * ==================================
@@ -27,7 +29,7 @@ import com.bjz.baselib.R;
 public class JZTitleView extends JZTitleDataView {
     /* 底部分割线是否显示 */
     boolean
-            isShowBottomHorView = false;
+            isShowBottomHorView = true;
 
     /* title文案 */
     String
@@ -93,8 +95,11 @@ public class JZTitleView extends JZTitleDataView {
             if (backListener != null) {
                 backListener.back();
             } else {
-                Activity activity = (Activity) mContext;
-                activity.finish();
+                if (mContext != null) {
+                    Activity activity = (Activity) mContext;
+                    activity.finish();
+                    JZPageAnimUtils.finishActivityAnim(activity);
+                }
             }
         });
 
@@ -102,8 +107,11 @@ public class JZTitleView extends JZTitleDataView {
             if (closeListener != null) {
                 closeListener.close();
             } else {
-                Activity activity = (Activity) mContext;
-                activity.finish();
+                if (mContext != null) {
+                    Activity activity = (Activity) mContext;
+                    activity.finish();
+                    JZPageAnimUtils.finishActivityAnim(activity);
+                }
             }
         });
     }

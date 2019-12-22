@@ -1,10 +1,10 @@
 package com.bjz.jzeasyandroid;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+import com.bjz.baselib.ui.page.JZBaseActivity;
+
+public class MainActivity extends JZBaseActivity<MainPresenter> {
 
     StudyTestManager studyTestManager;
 
@@ -14,30 +14,43 @@ public class MainActivity extends Activity {
             toBitmapTestText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        bindView();
-        setOnClick();
-
-        studyTestManager = new StudyTestManager();
-
+    public int getResId() {
+        return R.layout.activity_main;
     }
 
-    private void bindView() {
+    @Override
+    public void initView() {
         textView = findViewById(R.id.main_skip_synchronized_test_text);
         toBitmapTestText = findViewById(R.id.main_skip_bitmap_operation_test_text);
     }
 
-    private void setOnClick() {
+    @Override
+    public void initData() {
+        studyTestManager = new StudyTestManager();
+        setTitle("JZEasyAndroid");
+    }
+
+    private static final String bitmapOperationActivity = "com.bjz.wystudytestlib.imgOperation.ui.BitmapOperationActivity";
+
+    @Override
+    public void setListener() {
         textView.setOnClickListener(view -> {
             StudyTestManager.synchronizedTestClass.skipSynchronizedTestActivity(this);
         });
         /* 跳转bitmap测试页面 */
         toBitmapTestText.setOnClickListener(v -> {
-            StudyTestManager.synchronizedTestClass.skipBitmapOperationActivity(this);
+//            StudyTestManager.synchronizedTestClass.skipBitmapOperationActivity(this);
+            try {
+                jumpNextPage(null, Class.forName(bitmapOperationActivity));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
+    }
+
+    @Override
+    public MainPresenter getPresenter() {
+        return new MainPresenter(this, this);
     }
 
 

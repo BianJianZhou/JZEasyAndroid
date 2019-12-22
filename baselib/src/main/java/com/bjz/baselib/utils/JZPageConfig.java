@@ -21,8 +21,6 @@ package com.bjz.baselib.utils;
     }
 
     private JZPageConfig() {
-        isDragFinish = true;
-
         isTouchHideKeyBroad = false;
 
         isAddTopView = true;
@@ -33,9 +31,6 @@ package com.bjz.baselib.utils;
 
         isImersiveDark = true;
     }
-
-    /* 是否拖动退出 */
-    private boolean isDragFinish;
 
     /* 是否点击非输入区域软键盘消失 */
     private boolean isTouchHideKeyBroad;
@@ -48,11 +43,6 @@ package com.bjz.baselib.utils;
 
     private boolean isImersiveDark;
 
-
-    public JZPageConfig setDragFinish(boolean dragFinish) {
-        isDragFinish = dragFinish;
-        return this;
-    }
 
     public JZPageConfig setTouchHideKeyBroad(boolean touchHideKeyBroad) {
         isTouchHideKeyBroad = touchHideKeyBroad;
@@ -77,10 +67,6 @@ package com.bjz.baselib.utils;
     public JZPageConfig setImersiveDark(boolean isImersiveDark) {
         this.isImersiveDark = isImersiveDark;
         return this;
-    }
-
-    public boolean isDragFinish() {
-        return isDragFinish;
     }
 
     public boolean isTouchHideKeyBroad() {

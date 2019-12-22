@@ -16,13 +16,12 @@
 
             <TextView
                 android:id="@+id/base_title_view_back_text"
-                android:layout_width="@dimen/dimens_24"
-                android:layout_height="@dimen/dimens_24"
+                android:layout_width="@dimen/dimens_20"
+                android:layout_height="@dimen/dimens_36"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimens_20"
                 android:layout_marginRight="@dimen/dimens_30"
                 android:background="@mipmap/tm_back_black_icon" />
-
 
             <RelativeLayout
                 android:id="@+id/base_title_view_close_rl"
@@ -38,13 +37,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimens_3"
                     android:layout_centerVertical="true"
-                    android:background="@color/c666666" />
+                    android:background="@color/_666666" />
 
                 <View
                     android:layout_width="@dimen/dimens_3"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
-                    android:background="@color/c666666" />
+                    android:background="@color/_666666" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -76,6 +75,5 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimens_1"
         android:layout_alignParentBottom="true"
-        android:background="@color/cf4f4f4"
-        android:visibility="gone" />
+        android:background="@color/_f4f4f4" />
 </RelativeLayout>

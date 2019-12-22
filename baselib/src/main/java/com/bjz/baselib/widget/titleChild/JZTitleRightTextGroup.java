@@ -6,9 +6,11 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bjz.baselib.R;
 import com.bjz.baselib.utils.JZLog;
+import com.bjz.baselib.widget.JZTextView;
 
 import java.util.HashMap;
 import java.util.Map;

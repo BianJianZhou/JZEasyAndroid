@@ -6,7 +6,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application>
-        <activity android:name=".imgOperation.ui.BitmapOperationActivity"></activity>
+        <activity
+            android:name=".imgOperation.ui.BitmapOperationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/LunencyTheme"/>
         <activity android:name=".thread.synchronizedTest.SynchronizedTestActivity" />
 
         <service android:name=".acrossProcesses.service.AcrossProcessesTestService" />

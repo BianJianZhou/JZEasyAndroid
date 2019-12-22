@@ -36,8 +36,6 @@ public abstract class JZTitleDataView extends JZBaseView<String> {
     RelativeLayout
             rightGroupRl;
 
-    Context mContext;
-
     public JZTitleDataView(Context context) {
         super(context);
     }
@@ -48,7 +46,6 @@ public abstract class JZTitleDataView extends JZBaseView<String> {
 
     public JZTitleDataView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
     }
 
     public JZTitleRightIconGroup getRightJiaoHuGroup() {

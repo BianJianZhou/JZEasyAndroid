@@ -1,16 +1,13 @@
 package com.bjz.baselib.ui.page;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +25,7 @@ import com.bjz.baselib.bean.JZPageData;
 import com.bjz.baselib.event.JZOneStatusCallBack;
 import com.bjz.baselib.utils.AndroidBottomBarAdaptive;
 import com.bjz.baselib.utils.JZLog;
+import com.bjz.baselib.utils.JZPageAnimUtils;
 import com.bjz.baselib.utils.JZPageConfig;
 import com.bjz.baselib.utils.JZToast;
 import com.bjz.baselib.utils.JZUtil;
@@ -72,11 +70,6 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
     /* 是否第一次进入页面 */
     public boolean isFirstInto = true;
 
-    /* 手指按压初始坐标 */
-    float startX = 0;
-    float startY = 0;
-    long pushAnimBackDuration = 300;
-
     /* 执行色值过度的类 */
     ArgbEvaluator dragArgbEvaluator = null;
 
@@ -99,6 +92,11 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
     View view;
     /* 默认titleView */
     JZTitleView titleView;
+
+    /* 设置title */
+    public void setTitle(String titleStr) {
+        titleView.setData(titleStr);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,13 +122,15 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         screenH = JZUtil.screenHeigth(this);
 
         bigGroupView = new RelativeLayout(this);
-        bigGroupView.setBackgroundResource(setBigGroupBk());
+//        bigGroupView.setBackgroundResource(setBigGroupBk());
+        bigGroupView.setBackgroundColor(Color.parseColor("#ffffff"));
         /* 添加顶部1px横线 */
         top1PxView = new View(this);
         bigGroupView.addView(top1PxView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (int) getResources().getDimension(R.dimen.dimens_1)));
         /* 添加加载展示组件的逻辑 */
         resViewGroupView = new LinearLayout(this);
         resViewGroupView.setOrientation(LinearLayout.VERTICAL);
+        resViewGroupView.setBackgroundColor(Color.parseColor("#ffffff"));
         bigGroupView.addView(resViewGroupView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
         /* ****************************************************** 加载展示组件逻辑 ****************************************************** */
@@ -184,13 +184,30 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
                     .statusBarDarkFont(false)
                     .init();
         }
+
+//        findViewById(R.id.content).setBackgroundResource(R.color._ff8f0a);
+
+        decorView = this.getWindow().getDecorView();
+//        decorView.setBackgroundResource(R.color.TRANSPARENT);
+        decorView.setBackgroundResource(R.color._ff8f0a);
+        initView();
+        initData();
+        setListener();
     }
+
+    View decorView;
 
     public abstract int getResId();
 
     public View getCustomView() {
         return null;
     }
+
+    public abstract void initView();
+
+    public abstract void initData();
+
+    public abstract void setListener();
 
     public JZPageConfig getJzPageConfig() {
         return null;
@@ -211,7 +228,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
     public void jumpNextPage(JZPageData pageData, Class activity) {
         Intent intent = new Intent();
         intent.setClass(this, activity);
-        if (pageData.getKeys() != null && pageData.getKeys().size() > 0) {
+        if (pageData != null && pageData.getKeys() != null && pageData.getKeys().size() > 0) {
             for (String k : pageData.getKeys()) {
                 Object v = pageData.getV(k);
                 if (v instanceof Integer) {
@@ -231,10 +248,21 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
                 }
             }
         }
-        if (pageData.getIntentFlag() != 0) {
+        if (pageData != null && pageData.getIntentFlag() != 0) {
             intent.setFlags(pageData.getIntentFlag());
         }
         startActivity(intent);
+        JZPageAnimUtils.skipActivityAnim(this);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            JZPageAnimUtils.finishActivityAnim(this);
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     /* 用来处理当存在虚拟物理按键布局异常问题 */
@@ -301,6 +329,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         isStop = false;
         isDestory = true;
         pageLeftCycle.onDestory(presenter, this);
+        ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
     }
 
     public <viewT extends View> viewT bind(int id) {
@@ -308,7 +337,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
     }
 
     public int setBigGroupBk() {
-        return Color.parseColor("#ffffff");
+        return R.color._ffffff;
     }
 
     /* 显示加载圈 */
@@ -331,40 +360,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (jzPageConfig.isDragFinish()) {
-            if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-                startX = ev.getX();
-                startY = ev.getY();
-            } else if (startX < getResources().getDimension(R.dimen.dimens_20) && ev.getAction() == MotionEvent.ACTION_MOVE) {
-                float moveDistanceX = ev.getX() - startX;
-                if (moveDistanceX > 0) {
-                    resViewGroupView.setX(moveDistanceX);
-
-                    /* 随移动距离透明度改变 */
-                    int bgColor = (int) dragArgbEvaluator.evaluate(
-                            (moveDistanceX / (float) (screenW / 3)) > 1 ? 1 : moveDistanceX / (float) (screenW / 3), 0Xcc000000, 0X00000000);
-                    bigGroupView.setBackgroundColor(bgColor);
-
-                    return true;
-                }
-
-            } else if (startX < getResources().getDimension(R.dimen.dimens_20) && ev.getAction() == MotionEvent.ACTION_UP) {
-                float moveDistanceX = ev.getX() - startX;
-                /* 必须向右滑动才生效 */
-                if (ev.getX() - startX > 0) {
-                    if (moveDistanceX > JZUtil.screenWidth(this) / 3) {
-                        // 如果滑动的距离超过了手机屏幕的一半, 滑动处屏幕后再结束当前Activity
-                        continueMove(moveDistanceX);
-                    } else {
-                        // 如果滑动距离没有超过一半, 往回滑动
-                        rebackToLeft(moveDistanceX);
-                    }
-                }
-            }
-        }
-
         /* ****************************************************** 页面点击其他地方输入框隐藏逻辑 ****************************************************** */
-
         if (jzPageConfig.isTouchHideKeyBroad()) {
             if (ev.getAction() == MotionEvent.ACTION_DOWN) {
                 View v = getCurrentFocus();
@@ -384,44 +380,6 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         return super.dispatchTouchEvent(ev);
     }
 
-    /**
-     * 从当前位置一直往右滑动到消失。
-     * 这里使用了属性动画。
-     */
-    private void continueMove(float moveDistanceX) {
-        // 从当前位置移动到右侧。
-        ValueAnimator anim = ValueAnimator.ofFloat(moveDistanceX, JZUtil.screenWidth(this));
-        anim.setDuration(300); // 一秒的时间结束, 为了简单这里固定为1秒
-        anim.start();
-
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                // 位移
-                float x = (float) (animation.getAnimatedValue());
-                resViewGroupView.setX(x);
-            }
-        });
-
-        // 动画结束时结束当前Activity
-        anim.addListener(new AnimatorListenerAdapter() {
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                finish();
-            }
-        });
-    }
-
-    /**
-     * Activity被滑动到中途时，滑回去~
-     */
-    private void rebackToLeft(float moveDistanceX) {
-        ObjectAnimator.ofFloat(resViewGroupView, "X", moveDistanceX, 0).setDuration(pushAnimBackDuration).start();
-        postDelayed(pushAnimBackDuration, result -> {
-            bigGroupView.setBackgroundResource(setBigGroupBk());
-        });
-    }
 
     private boolean isShouldHideInput(View v, MotionEvent event) {
         if (v != null && (v instanceof EditText)) {

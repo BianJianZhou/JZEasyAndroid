@@ -28,4 +28,19 @@
         <!-- 指定消失的动画xml -->
         <item name="android:windowExitAnimation">@anim/base_pop_anim_alpha_to_no</item>
     </style>
+
+    <!-- activity 透明主题 -->
+    <style name="TransparentTransparent">
+        <item name="android:windowBackground">#00ffffff</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+    <!-- 透明主题 -->
+    <style name="LunencyTheme">
+        <item name="android:windowBackground">#00ffffff</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>
