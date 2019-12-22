@@ -5,7 +5,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.bjz.wyeasyandroid"
+        applicationId "com.bjz.jzeasyandroid"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
@@ -32,6 +32,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    /* 学习模块 */
     implementation project(path: ':wystudytestlib')
     implementation project(path: ':wydemolib')
 

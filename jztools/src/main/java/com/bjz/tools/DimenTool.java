@@ -18,7 +18,7 @@ public class DimenTool {
     /* 尺寸单位 */
     String unitStr = "px";
     /* dimens 名称 */
-    String dimensName = "my_dimens_";// + i
+    String dimensName = "dimens_";// + i
     /* 标注分辨率 */
     private final double labelResolutionRatio = 750;
     /* 读取文件名称 */

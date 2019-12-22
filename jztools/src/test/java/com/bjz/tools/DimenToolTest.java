@@ -1,14 +1,18 @@
-package com.bjz.baselib;
+package com.bjz.tools;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
 
-public class WYBasePresenterTest {
+public class DimenToolTest {
+
+    DimenTool dimenTool;
 
     @Before
     public void setUp() throws Exception {
+        dimenTool = new DimenTool();
     }
 
     @After
@@ -16,6 +20,7 @@ public class WYBasePresenterTest {
     }
 
     @Test
-    public void 代码测试() {
+    public void init() {
+        dimenTool.init();
     }
 }
