@@ -2,7 +2,8 @@ package com.bjz.jzeasyandroid;
 
 import android.widget.TextView;
 
-import com.bjz.baselib.ui.page.JZBaseActivity;
+import com.bjz.jzappframe.ui.JZBaseActivity;
+
 
 public class MainActivity extends JZBaseActivity<MainPresenter> {
 

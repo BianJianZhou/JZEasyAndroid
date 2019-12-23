@@ -2,8 +2,9 @@ package com.bjz.wystudytestlib.imgOperation.presenter;
 
 import android.content.Context;
 
-import com.bjz.baselib.IJZBaseView;
-import com.bjz.baselib.JZBasePresenter;
+import com.bjz.jzappframe.IJZBaseView;
+import com.bjz.jzappframe.JZBasePresenter;
+
 
 public class BitmapOperationPresenter extends JZBasePresenter {
     public BitmapOperationPresenter(IJZBaseView ijzBaseView, Context context) {

@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bjz.baselib.ui.page.JZBaseActivity;
+import com.bjz.jzappframe.ui.JZBaseActivity;
 import com.bjz.wystudytestlib.R;
 import com.bjz.wystudytestlib.imgOperation.presenter.BitmapOperationPresenter;
 import com.bjz.wystudytestlib.imgOperation.utils.BitmapUtil;

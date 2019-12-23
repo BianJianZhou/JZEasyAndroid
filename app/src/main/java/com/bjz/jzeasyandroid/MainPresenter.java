@@ -2,8 +2,9 @@ package com.bjz.jzeasyandroid;
 
 import android.content.Context;
 
-import com.bjz.baselib.IJZBaseView;
-import com.bjz.baselib.JZBasePresenter;
+import com.bjz.jzappframe.IJZBaseView;
+import com.bjz.jzappframe.JZBasePresenter;
+
 
 public class MainPresenter extends JZBasePresenter {
     public MainPresenter(IJZBaseView ijzBaseView, Context context) {

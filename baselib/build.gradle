@@ -38,4 +38,5 @@ dependencies {
 
     /* 组件化开发方案 */
     api "io.github.prototypez:app-joint-core:1.7"
+    api 'com.github.Mr-Bian:JZFrame:v1.0.1'
 }
